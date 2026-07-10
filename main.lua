@@ -7,6 +7,11 @@ WINDOW_HEIGHT = 735
 VIRTUAL_WIDTH = 423
 VIRTUAL_HEIGHT = 243
 
+backgroundScroll = 0
+backgroundScrollSpeed = 144
+backgroundLoopingPoint = 498
+
+
 math.randomseed(os.time())
 
 function love.load()
@@ -44,14 +49,13 @@ end
 
 
 function love.update(dt)
-    
-
+    backgroundScroll = (backgroundScroll + backgroundScrollSpeed * dt) % backgroundLoopingPoint
 end
 
 function love.draw()
     push:start()
     love.graphics.setFont(largeFont)
-    love.graphics.draw(background, 0, 0)
+    love.graphics.draw(background, -backgroundScroll, 0)
     displayFPS()
 
     push:finish()
