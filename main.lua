@@ -1,5 +1,6 @@
 push = require 'push'
 class = require 'class'
+require 'Bird'
 
 WINDOW_WIDTH = 1280 
 WINDOW_HEIGHT = 735
@@ -8,9 +9,8 @@ VIRTUAL_WIDTH = 423
 VIRTUAL_HEIGHT = 243
 
 backgroundScroll = 0
-backgroundScrollSpeed = 144
+backgroundScrollSpeed = 60
 backgroundLoopingPoint = 498
-
 
 math.randomseed(os.time())
 
@@ -19,13 +19,15 @@ function love.load()
 
     background = love.graphics.newImage('background.png')
 
-    love.window.setTitle('Flappy Bird')
+    love.window.setTitle('Flippy Dragon')
 
     largeFont = love.graphics.newFont('Minecraft.ttf', 15)
     smallFont = love.graphics.newFont('Minecraft.ttf', 10)
 
     largeFont:setFilter('nearest', 'nearest')
     smallFont:setFilter('nearest', 'nearest')
+
+    bird = Bird()
 
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
@@ -46,8 +48,6 @@ function love.keypressed(key)
 
 end
 
-
-
 function love.update(dt)
     backgroundScroll = (backgroundScroll + backgroundScrollSpeed * dt) % backgroundLoopingPoint
 end
@@ -57,7 +57,7 @@ function love.draw()
     love.graphics.setFont(largeFont)
     love.graphics.draw(background, -backgroundScroll, 0)
     displayFPS()
-
+    bird:render()
     push:finish()
 end
 
