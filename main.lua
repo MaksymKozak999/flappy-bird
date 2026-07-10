@@ -1,0 +1,65 @@
+push = require 'push'
+class = require 'class'
+
+WINDOW_WIDTH = 1280 
+WINDOW_HEIGHT = 735
+
+VIRTUAL_WIDTH = 423
+VIRTUAL_HEIGHT = 243
+
+math.randomseed(os.time())
+
+function love.load()
+    love.graphics.setDefaultFilter('nearest', 'nearest')
+
+    background = love.graphics.newImage('background.png')
+
+    love.window.setTitle('Flappy Bird')
+
+    largeFont = love.graphics.newFont('Minecraft.ttf', 15)
+    smallFont = love.graphics.newFont('Minecraft.ttf', 10)
+
+    largeFont:setFilter('nearest', 'nearest')
+    smallFont:setFilter('nearest', 'nearest')
+
+    push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
+        fullscreen = false,
+        resizable = true,
+        vsync = true
+    })
+end 
+
+function love.resize(w, h)
+    push:resize(w, h)
+end 
+
+function love.keypressed(key)
+
+    if key == 'escape' then 
+        love.event.quit()
+    end
+
+end
+
+
+
+function love.update(dt)
+    
+
+end
+
+function love.draw()
+    push:start()
+    love.graphics.setFont(largeFont)
+    love.graphics.draw(background, 0, 0)
+    displayFPS()
+
+    push:finish()
+end
+
+function displayFPS()
+    love.graphics.setFont(smallFont)
+    love.graphics.setColor(0, 1, 0, 1)
+    love.graphics.print(tostring(love.timer.getFPS()), 25, 10)
+    love.graphics.setColor(1,1,1,1)
+end
