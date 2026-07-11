@@ -34,6 +34,8 @@ function love.load()
         resizable = true,
         vsync = true
     })
+
+    love.keyboard.keysPressed = {}
 end 
 
 function love.resize(w, h)
@@ -42,16 +44,28 @@ end
 
 function love.keypressed(key)
 
+    love.keyboard.keysPressed[key] = true
+
     if key == 'escape' then 
         love.event.quit()
     end
 
 end
 
+function love.keyboard.wasPressed(key)
+    if love.keyboard.keysPressed[key] then
+        return true
+    else
+        return false
+    end
+end
+
 function love.update(dt)
     backgroundScroll = (backgroundScroll + backgroundScrollSpeed * dt) % backgroundLoopingPoint
 
     bird:update(dt)
+
+    love.keyboard.keysPressed = {}
 end
 
 function love.draw()
