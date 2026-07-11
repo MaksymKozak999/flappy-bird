@@ -36,11 +36,16 @@ function love.load()
     })
 
     love.keyboard.keysPressed = {}
+    love.mouse.buttonsPressed = {}
 end 
 
 function love.resize(w, h)
     push:resize(w, h)
 end 
+
+function love.mousepressed(x, y, button)
+    love.mouse.buttonsPressed[button] = true
+end
 
 function love.keypressed(key)
 
@@ -50,6 +55,10 @@ function love.keypressed(key)
         love.event.quit()
     end
 
+end
+
+function love.mouse.wasPressed(button)
+    return love.mouse.buttonsPressed[button] == true
 end
 
 function love.keyboard.wasPressed(key)
@@ -66,6 +75,7 @@ function love.update(dt)
     bird:update(dt)
 
     love.keyboard.keysPressed = {}
+    love.mouse.buttonsPressed = {}
 end
 
 function love.draw()
