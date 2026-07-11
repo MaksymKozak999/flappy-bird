@@ -50,6 +50,8 @@ end
 
 function love.update(dt)
     backgroundScroll = (backgroundScroll + backgroundScrollSpeed * dt) % backgroundLoopingPoint
+
+    bird:update(dt)
 end
 
 function love.draw()

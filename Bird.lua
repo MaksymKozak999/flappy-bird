@@ -1,5 +1,7 @@
 Bird = class{}
 
+local gravity = 1000
+
 function Bird:init()
     self.image  = love.graphics.newImage('fly.png')
     self.width = self.image:getWidth()
@@ -7,6 +9,17 @@ function Bird:init()
 
     self.x = VIRTUAL_WIDTH / 2 - (self.width / 2)
     self.y = VIRTUAL_HEIGHT / 2 - (self.height / 2)
+
+    self.dy = 0
+end
+
+
+function Bird:update(dt)
+
+    self.dy = self.dy + gravity * dt
+
+    self.y = self.y + self.dy * dt
+    
 end
 
 function Bird:render()
