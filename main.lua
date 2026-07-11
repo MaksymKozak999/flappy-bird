@@ -19,7 +19,7 @@ function love.load()
 
     background = love.graphics.newImage('background.png')
 
-    love.window.setTitle('Flippy Dragon')
+    love.window.setTitle('Flappy')
 
     largeFont = love.graphics.newFont('Minecraft.ttf', 15)
     smallFont = love.graphics.newFont('Minecraft.ttf', 10)
